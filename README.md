@@ -1,6 +1,6 @@
 # ReactiveForm
 
-Update the URL variable in /src/app/form-data/form-data.component.ts
+Update the URL  in /src/app/form-data/form-data.component.ts
 
 ## Development server
 
