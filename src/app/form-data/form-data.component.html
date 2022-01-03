@@ -1,0 +1,64 @@
+
+<form  [formGroup]="formdata" (ngSubmit)="getOTP(formdata.value)">
+    <div class="alert alert-success alert-dismissible fade show" role="alert" [hidden]="!successAlert">
+        <strong> Thank you for verification </strong> {{formdata.get('fullname')?.value}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="reset()" aria-label="Close"></button>
+    </div>
+    <div>
+    <mat-form-field class="fullname-full-width" appearance="outline">
+        <mat-label>FULL NAME</mat-label>
+        <input matInput formControlName="fullname" #fn>
+        <mat-hint align="end">{{fn.value?.length || 0}}/140</mat-hint>
+    </mat-form-field>
+   
+    <mat-form-field class="pancard-full-width" appearance="outline">
+       <mat-label>PAN NUMBER</mat-label>
+       <input matInput formControlName="panNumber" #pan maxlength="10" class="pan" (input) = "pan.value = pan.value.toUpperCase()">
+       <mat-hint align="end">{{pan.value?.length || 0}}/10</mat-hint>
+       <mat-error *ngIf="formdata.hasError('minLength','panNumber')">Invalid Pan Details</mat-error>
+   </mat-form-field>
+   
+    <mat-form-field class="email-full-width" appearance="outline">
+        <mat-label>EMAIL</mat-label>
+        <input matInput formControlName="email" placeholder="email@example.com"  >
+        <mat-hint>email@example.com</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="city-full-width" appearance="outline">
+        <mat-label>CITY</mat-label>
+        <input matInput formControlName="city">
+        <mat-error *ngIf="formdata.hasError('pattern','city')">Error in City Name</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="mobile-full-width" appearance="outline">
+        <mat-label>Mobile</mat-label>
+        <span matPrefix>+91 &nbsp;</span>
+        <input (input)="getOTP(formdata.value)" type="tel" matInput placeholder="9124587620" formControlName="mobile" maxlength="10" #mobile>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error *ngIf="formdata.hasError('required','mobile')">Numbers Only</mat-error>
+    </mat-form-field>
+</div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!apiError">
+    <strong> Error Occured </strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="close()" aria-label="Close"></button>
+</div>
+
+    <div [hidden]="formdata.invalid">
+        <mat-form-field class="verify-full-width" appearance="outline">
+            <mat-label>VerifyOTP</mat-label>
+             <input type="password" matInput [formControl]="otp" maxlength="4" (input) = "VerifyOTP()" >
+        </mat-form-field>
+    </div>
+    <div [hidden]="formdata.invalid">
+        <p [hidden]="!hidebutton">
+    <a mat-stroked-button [disabled]="disableLink"  (click)="getOTP(formdata.value)">Resend OTP</a>
+</p>    
+</div> 
+    <countdown #cd [config]="config" (event)="handleEvent($event)" [hidden]="!countDown">$!m!:$!s!</countdown>       
+
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" [hidden]="!maxRetry">
+        <strong> You Have Reached Maximum Retry Limit Please Try After Few Hours</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" (click)="reset_max()" aria-label="Close"></button>
+    </div>
+</form>

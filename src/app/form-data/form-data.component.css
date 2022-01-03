@@ -1,0 +1,19 @@
+
+.pan {
+    text-transform: uppercase;
+}
+
+form{
+width: 35%;
+padding-top: 10rem;
+margin: 0 auto;
+height: 60%;
+align-items: center;
+}
+
+mat-form-field {
+width: 60%;
+font-weight: bold;
+font-size: 20;
+}
+
