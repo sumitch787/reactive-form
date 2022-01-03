@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, Directive, OnInit,ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm ,Validators} from '@angular/forms';
-import { catchError, Observable, pipe, throwError } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup ,Validators} from '@angular/forms';
+import { catchError, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { CountdownConfig, CountdownEvent, CountdownComponent} from 'ngx-countdown';
+import { CountdownConfig, CountdownEvent} from 'ngx-countdown';
 
 @Component({
   selector: 'app-form-data',
