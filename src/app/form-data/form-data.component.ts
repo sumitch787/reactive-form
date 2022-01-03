@@ -13,8 +13,8 @@ import { CountdownConfig, CountdownEvent} from 'ngx-countdown';
 export class FormDataComponent implements OnInit {
 config: CountdownConfig ={};
 
-url = "something"  //Update with Working URL
-
+url_getopt = "something"  //Update with Working URL
+url_verifyotp = "something"
 formdata!: FormGroup;
 hidebutton: boolean = true;
 successAlert: boolean = false;
@@ -55,7 +55,7 @@ VerifyOTP(){
 }}
 // GetOTP
 postAPI(){
-this.http.post(this.url,{
+this.http.post(this.url_getopt,{
   "fullname":"this.formdata.get('fullname').value",
   "email":"this.formdata.get('email').value",
   "city":"this.formdata.get('city').value",
@@ -75,7 +75,7 @@ this.http.post(this.url,{
 
 //Verify OTP 
 verifyAPI(){
-  this.http.post(this.url,{
+  this.http.post(this.url_verifyotp,{
     "otp": "this.opt.value",
     "mobile": "this.new_mobile_number"
   }).pipe(
@@ -132,6 +132,7 @@ success(){
   this.showVerify = !this.showVerify;
   this.countDown = !this.countDown;
   this.hidebutton = !this.hidebutton;
+  this.countDown = !this.countDown;  
 }
 
 
